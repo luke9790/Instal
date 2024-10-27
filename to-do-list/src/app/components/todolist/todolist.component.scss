@@ -1,0 +1,102 @@
+.todolist-container {
+	max-width: 600px;
+	margin: 0 auto;
+	padding: 20px;
+	background: #f9f9f9;
+	border-radius: 8px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .retrieve-tasks-button {
+	display: block;
+	margin-bottom: 20px;
+	padding: 10px 15px;
+	background: #007bff;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	width: 100%;
+  }
+  
+  .task-input {
+	display: flex;
+	margin-bottom: 20px;
+  
+	input {
+	  flex: 1;
+	  padding: 10px;
+	  border: 1px solid #ccc;
+	  border-radius: 4px;
+	  margin-right: 10px;
+	}
+  
+	button {
+	  padding: 10px 15px;
+	  background: #28a745;
+	  color: #fff;
+	  border: none;
+	  border-radius: 4px;
+	  cursor: pointer;
+	}
+  }
+  
+  .task-list {
+	list-style: none;
+	padding: 0;
+  
+	li {
+	  display: flex;
+	  justify-content: space-between;
+	  align-items: center;
+	  padding: 10px;
+	  background: #fff;
+	  border-bottom: 1px solid #eee;
+	  cursor: pointer;
+  
+	  .task-info {
+		display: flex;
+		flex-direction: column;
+  
+		.completed {
+		  text-decoration: line-through;
+		  color: #6c757d;
+		}
+	  }
+  
+	  .task-status {
+		padding: 5px 10px;
+		border-radius: 4px;
+		margin-top: 5px;
+	  }
+  
+	  .task-status.active {
+		background-color: #28a745;
+		color: #fff;
+	  }
+  
+	  .task-status.not-completed {
+		background-color: #ffc107;
+		color: #fff;
+	  }
+  
+	  .task-actions {
+		display: flex;
+		gap: 10px;
+	  }
+  
+	  button {
+		background: #dc3545;
+		color: #fff;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+		padding: 5px 10px;
+  
+		&:first-of-type {
+		  background: #007bff;
+		}
+	  }
+	}
+  }
+  

@@ -1,0 +1,26 @@
+<div class="todolist-container">
+	<h2>Lista di attività</h2>
+  
+	<button class="retrieve-tasks-button" (click)="loadTasks()">Recupera Task</button>
+  
+	<div class="task-input">
+	  <input [(ngModel)]="newTaskName" placeholder="Aggiungi nuova attività..." />
+	  <button (click)="addTask()">Aggiungi</button>
+	</div>
+
+	<ul class="task-list">
+	  <li *ngFor="let task of tasks">
+		<div class="task-info">
+		  <span [class.completed]="task.completed">{{ task.name }}</span>
+		  <small class="task-status" [ngClass]="{ 'active': task.completed, 'not-completed': !task.completed }">
+			{{ task.completed ? 'Completata' : 'Non completata' }}
+		  </small>
+		</div>
+		<div class="task-actions">
+		  <button (click)="toggleTask(task)">Cambia Stato</button>
+		  <button (click)="deleteTask(task.id)">Elimina</button>
+		</div>
+	  </li>
+	</ul>
+  </div>
+  
