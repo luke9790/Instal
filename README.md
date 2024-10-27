@@ -4,6 +4,8 @@ Questo progetto è composto da due parti principali:
 1. **Backend**: Un'API REST per la gestione delle task, costruita con Node.js e Express.
 2. **Frontend**: Un'applicazione Angular che utilizza un servizio per comunicare con l'API e gestire le task.
 
+Puoi testare direttamente dall'app il funzionamento dell'API, in alternativa con Postman o Curl.
+
 ## Prerequisiti
 
 Assicurati di avere installato Docker e Docker Compose.
