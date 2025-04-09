@@ -1,6 +1,10 @@
 const express = require('express');
 const cors = require('cors');
 const sqlite3 = require('sqlite3').verbose();
+const fs = require('fs');
+const path = require('path');
+const DB_PATH = path.join(__dirname, 'tasks.db');
+const dbExists = fs.existsSync(DB_PATH);
 
 const app = express();
 const PORT = 3000;
@@ -10,19 +14,29 @@ app.use(cors());
 app.use(express.json());
 
 // Connessione al database SQLite
-const db = new sqlite3.Database('./tasks.db', (err) => {
+const db = new sqlite3.Database(DB_PATH, (err) => {
     if (err) {
         console.error('Errore di connessione al database:', err.message);
-    } else {
-        console.log('Connesso al database SQLite');
-        // Creazione della tabella tasks se non esiste
-        db.run(`CREATE TABLE IF NOT EXISTS tasks (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL,
-            completed BOOLEAN NOT NULL
-        )`);
+        return;
     }
-});
+
+    console.log('Connesso al database SQLite');
+
+    // Se il DB non esisteva, creiamo la tabella e inseriamo la task di test
+    if (!dbExists) {
+        db.serialize(() => {
+            db.run(`CREATE TABLE IF NOT EXISTS tasks (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                completed BOOLEAN NOT NULL
+            )`);
+
+            db.run(`INSERT INTO tasks (name, completed) VALUES (?, ?)`, ['Prima task di test', false]);
+            console.log('Tabella creata e task di test inserita');
+        });
+    }
+})
+
 
 // 1. Creare una nuova attività (task)
 app.post('/tasks', (req, res) => {
